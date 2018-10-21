@@ -51,17 +51,26 @@ while True:
  #If it talks to something out of the white list it kills
  #this script otherwise just keep running
 
-     for x in white_list:
-         if s_addr == pi_addr and d_addr == x :
-            safe = True
-            bad_ip = ''
-            break
-         elif s_addr == pi_addr and d_addr != x :
-            safe = False
-            bad_ip = d_addr
+     if s_addr == pi_addr and d_addr in white_list :
+          #Changed this to check if destination is in white_list instead of iterating over the white_list and executing extra code
+          safe = True
+          bad_ip = ''
+     elif s_addr != pi_addr :
+          #This should raise exception, but I'm lazy
+          print('Source IP error')
+     else:
+          safe = False
+          intruder(s_addr, d_addr)
 
-     if safe != True and s_addr == pi_addr and d_addr == bad_ip :
-         print('Intruder alert!')
-         print('Source: ', pi_addr)
-         print('Destination: ', bad_ip)
-         sys.exit()
+#Replaced this with the function below
+#     if safe != True and s_addr == pi_addr and d_addr == bad_ip :
+#         print('Intruder alert!')
+#         print('Source: ', pi_addr)
+#         print('Destination: ', bad_ip)
+#         sys.exit()
+         
+def intruder(s_addr, bad_ip):
+     print('Intruder alert!')
+     print('Source: ', s_addr)
+     print('Destination: ', bad_ip)
+     sys.exit()
