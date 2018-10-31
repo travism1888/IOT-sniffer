@@ -11,7 +11,12 @@ with open('whitelist.txt') as f:
      white_list = f.read().strip().split('\n')
 
 #My pi's address
-pi_addr = '192.168.8.221'
+def get_ip():
+     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+     s.connect(('8.8.8.8', 80))
+     return s.getsockname()[0]
+pi_addr = get_ip()
+
 
 #My trigger to alert
 safe = False
