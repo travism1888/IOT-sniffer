@@ -5,12 +5,10 @@ import sys
 from struct import *
 
 #Setup phase
-#Create my list of known IP's
-white_list = ['192.168.8.224',
-              '192.168.8.1',
-              '8.8.8.8',
-              '54.173.242.118',
-              '198.50.238.156']
+#Create my list of known IPs
+white_list = []
+with open('whitelist.txt') as f:
+     white_list = f.read().strip().split('\n')
 
 #My pi's address
 pi_addr = '192.168.8.221'
